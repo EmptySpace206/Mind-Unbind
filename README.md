@@ -1,7 +1,8 @@
 This is a open-source version of the game Mind Unbind. Currently, only the core scoring algorithm - MovePredictionEngine - is published.
 
-Mind Unbind is an abstract, free-form drawing game. The player draws a continuous and ever-changing curve, aiming to minimize repetition.
-The obstacle is the player's own doodling habits: tendencies to repeat patterns, even with a best effort to vary them. 
+Mind Unbind is an abstract, free-form drawing game. 
+The goal is to draw a continuous curve, varying its directional flow, changing how it changes.
+The obstacle is the player's own tendency to doodle in particular, habitual ways. 
 The score is feedback on whether intention to change, or ingrained habit, was stronger (and to what degree). 
 
 Ultimately, it explores 'free-will' in a gamified way. 
@@ -10,8 +11,6 @@ Note that the game segments the continuous curve (as in the drawings below) into
 
 ------------
 ![ScoreExamples1](https://github.com/user-attachments/assets/9e9a3438-3b29-4fa6-bbc3-2c9c2bfe2bfc)
-
-The goal is to draw a continuous curve, varying its directional flow, changing how it changes. Done well, this creates intuitively complex drawings.
 
 Scores range 0 to 200: from no variation (a straight line, or circle), to optimally varied shapes. A random, truly mindless scribbler - lacking both intent and habit - averages 100.
 
