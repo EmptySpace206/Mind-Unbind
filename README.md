@@ -3,7 +3,7 @@ This is a open-source version of the game Mind Unbind. Currently, only the core 
 Mind Unbind is an abstract, free-form drawing game. 
 The goal is to draw a continuous curve, varying its directional flow, changing how it changes.
 The obstacle is the player's own tendency to doodle in particular, habitual ways. 
-The score is feedback on whether intention to change, or ingrained habit, was the stronger factor.
+The score is feedback on whether intention to change, or ingrained habit, was the stronger factor (100 is the key threshold). 
 
 Ultimately, it explores 'free-will' in a gamified way. 
 
