@@ -14,7 +14,7 @@ Note that the game segments the continuous curve (like the drawings below) into 
 
 Scores range 0 to 200: from no variation (a straight line, or circle), to optimally varied shapes. A random, truly mindless scribbler - lacking both intent and habit - averages 100.
 
-Human variation is far from optimal: scores above 120 are rare, as subtle doodling defaults inevitably creep into our scribbling.
+Human scores span a narrower range, around 80 to 120. Effortless 'scribble randomly' attempts typically reach 80; yet surpassing 120 is rare, as subtle doodling defaults inevitably creep into our scribbling.
 
 While you endeavor to vary curves as best you can, your signature habits lurk in the background, challenging your efforts. Even matching randomness can be quite difficult!
 
