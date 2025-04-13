@@ -10,7 +10,8 @@ Ultimately, it's a gamified exploration into both the influence of habit, and ho
 Note that the game segments the continuous curve (like the drawings below) into a series of discrete 'moves', which MovePredictionEngine processes. 
 
 ------------
-![ScoreExamples1](https://github.com/user-attachments/assets/9e9a3438-3b29-4fa6-bbc3-2c9c2bfe2bfc)
+![ScoreIncrease1](https://github.com/user-attachments/assets/3d3ae673-094b-48f3-9e49-e735dab4e0f6)
+
 
 Scores range 0 to 200: from no variation (a straight line, or circle), to optimally varied shapes. A random, truly mindless scribbler - lacking both intent and habit - averages 100.
 
@@ -18,9 +19,8 @@ Human scores span a narrower range, around 80 to 120. Effortless 'scribble rando
 
 While you endeavor to vary curves as best you can, your signature habits lurk in the background, challenging your efforts. Even matching randomness can be quite difficult!
 
-![ScoreExampeles2](https://github.com/user-attachments/assets/4eb274db-d709-40cd-b6be-008c2966efe6)
-![ScoreExamples3](https://github.com/user-attachments/assets/c40513c1-b1be-43a8-9ba3-40d932432232)
-
+![ScoreIncrease2](https://github.com/user-attachments/assets/da9ff95f-707c-496f-8280-cf4d63bd4284)
+![ScoreIncrease3](https://github.com/user-attachments/assets/502f8714-2dad-4757-a173-d0945a639725)
 
 ------------
 ![Examples4](https://github.com/user-attachments/assets/dedb216b-194d-459c-ba88-cde80eda1227)
