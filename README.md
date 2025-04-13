@@ -23,6 +23,7 @@ While you endeavor to vary curves as best you can, your signature habits lurk in
 ![ScoreIncrease3](https://github.com/user-attachments/assets/502f8714-2dad-4757-a173-d0945a639725)
 
 ------------
-![Examples4](https://github.com/user-attachments/assets/dedb216b-194d-459c-ba88-cde80eda1227)
+![MainExample](https://github.com/user-attachments/assets/8ff407e9-5e4a-4590-84b6-29496ffecd79)
+
 
 
