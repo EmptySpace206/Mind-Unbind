@@ -2,10 +2,12 @@ This is a open-source version of the game Mind Unbind. Currently, only the core 
 
 Mind Unbind is an abstract, free-form drawing game. 
 The goal is to draw a continuous curve, varying its directional flow, changing how it changes.
-The obstacle is the player's own doodling habits, making this a more challenging game than often expected.
-The score is feedback on whether the player's effort to change overcame repetitive tendencies, 100 being the key threshold.
 
-Ultimately, it's a gamified exploration into both the influence of habit, and how its possible to 'unbind' from its often invisible grip.
+The obstacle? The player's own doodling habits, which make this an unexpectedly challenging game. 
+
+The score indicates how the player's efforts at variation overcame repetitive tendencies. 100 is a key threshold: as good as random, unintentional scribbling. 
+
+Will your mindful changes perform better than mindlessness? 
 
 Note that the game segments the continuous curve (like the drawings below) into a series of discrete 'moves', which MovePredictionEngine processes. 
 
