@@ -112,7 +112,6 @@ class MovePredictionEngine:
         # The issue is that earlier moves have a greater weight on the final score, because
         # (1) they get scored based on a short, simple history, and (2) they also impact scores of later moves. 
         # This weights scores by current move count, making final scores align better with visible variation.
-        # Notably, sequences will score more similarly when traversed in reversed order, and also after changing early moves.
         #
         # historyDepth^scoreScaler = e (~2.72). For 300 moves, move #5 gets 1.33; #75 gets 2.13; #150 gets 2.41; #225 gets 2.58.
         self.scoreScaler = (1.0 / math.log(self.history_depth)); # In get_scoring_weight(), we use moveCount^scoreScaler as a multiplier. 
@@ -131,13 +130,14 @@ class MovePredictionEngine:
         # Note the value caching outside the inner-most operations is for performance only.
         for d in range(len(self.history)):
             hist_move = self.history[d]
+            hist_move_reverse = self.history[(self.history.__len__() - 1) - d]
             move_weights = self.weights[d]
             for i in range(BaseMoveWeights.StateCount):
                 move_weights_i = move_weights[i]
                 move_state_i = move.states[i]
                 for j in range(BaseMoveWeights.StateCount):
                     pred.states[i] += hist_move.states[j] * move_weights_i.states[j]
-                    move_weights_i.states[j] += (move_state_i * hist_move.states[j])
+                    move_weights_i.states[j] += (move_state_i * hist_move.states[j]) + (move_state_i * hist_move_reverse.states[j])
 
         self.history.insert(0, move)
         if len(self.history) > self.history_depth:
@@ -278,37 +278,37 @@ if __name__ == "__main__":
     # Demos with 30-move 'games'
 
     # A rough circle (moves ~30 degrees apart, clockwise)
-    # Scores 3.9
+    # Scores 3.3
     moves = [0, 30, 62, 89, 120, 147, 181, 210, 233, 270, 300, 330, 359, 29, 63, 95, 120, 151, 182, 211, 241, 270, 300, 325, 0, 29, 58, 90, 118, 146]
     score = MovePredictionEngine.test_score_move_series(moves)
     draw_moves(moves, score)
 
     # A spiral (add 3 degrees each move, clockwise)
-    # Scores 64.5
+    # Scores 62.18
     moves = [0, 3, 9, 18, 30, 45, 63, 84, 108, 135, 165, 198, 234, 273, 315, 0, 48, 99, 154, 214, 287, 353, 62, 134, 209, 287, 8, 92, 179, 269]
     score = MovePredictionEngine.test_score_move_series(moves)
     draw_moves(moves, score)
 
     # Roughly back-forth, then roughly straight (repeated 3x)
-    # Scores 34.7
+    # Scores 39.67
     moves = [270, 100, 280, 95, 285, 97, 90, 93, 95, 91, 90, 270, 93, 280, 101, 283, 280, 277, 280, 285, 105, 280, 102, 277, 98, 95, 90, 100, 97, 90]
     score = MovePredictionEngine.test_score_move_series(moves)
     draw_moves(moves, score)
 
     # Above, but change to a rough boxes for final 10 moves
-    # Scores 78.6
+    # Scores 72.96
     moves = [270, 100, 280, 95, 285, 97, 90, 93, 95, 91, 90, 270, 93, 280, 101, 283, 280, 277, 280, 10, 100, 185, 280, 15, 100, 185, 275, 0, 90, 180]
     score = MovePredictionEngine.test_score_move_series(moves)
     draw_moves(moves, score)
 
     # High variation in angle changes
-    # Scores 121.9
+    # Scores 125.36
     moves = [290, 330, 180, 240, 80, 90, 135, 135, 85, 230, 0, 125, 270, 100, 235, 40, 30, 75, 105, 0, 110, 210, 315, 345, 125, 150, 155, 280, 30, 50]
     score = MovePredictionEngine.test_score_move_series(moves)
     draw_moves(moves, score)
 
     # Higher variation in angle changes
-    # Scores 158.8
+    # Scores 140.06
     moves = [90, 110, 30, 200, 155, 135, 330, 175, 325, 330, 315, 350, 25, 220, 60, 300, 300, 50, 45, 15, 200, 100, 320, 120, 330, 150, 50, 300, 220, 120]
     score = MovePredictionEngine.test_score_move_series(moves)
     draw_moves(moves, score)
