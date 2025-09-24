@@ -11,6 +11,7 @@ Will your mindful changes perform better than mindlessness?
 
 ------------
 Note that the game segments the continuous curve (like the drawings below) into a series of discrete 'moves', which MovePredictionEngine processes. 
+
 <img width="1080" height="1280" alt="ScoreIncrease1" src="https://github.com/user-attachments/assets/9f1f9cb8-ccd5-4367-85d7-a93c7ed0e1f4" />
 
 Scores range 0 to 200: from no variation (a straight line, or circle), to optimally varied shapes. A random, truly mindless scribbler - lacking both intent and habit - averages 100.
