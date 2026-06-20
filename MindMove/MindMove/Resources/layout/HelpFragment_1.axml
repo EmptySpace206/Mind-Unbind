@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+            <ImageView
+                android:id="@+id/c_helpImage1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="6sp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ScoreIncrease2"/>
+	        <TextView
+                android:id="@+id/c_helpText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+		        android:paddingLeft="8sp"
+                android:paddingRight="2sp"
+                android:paddingBottom="12sp"
+                android:adjustViewBounds="true"
+                android:textColor="#D2D8FF"
+                android:text=
+"\nDrawing is free-form. 
+\nThe goal is to continually change your pattern of directional change.
+Done well, this creates drawings of varied shapes, and a high score.
+\n\nScores range from 0 to 200: no variation (a straight line, or circle), to optimally distinct shapes. 
+A random draw generator - which lacks both intention to change, and underlying habit - averages 100.
+\n\nHuman variation is far from optimal: scores above 120 are rare, as subtle doodling defaults inevitably creep into our scribbling.
+\n\nWhile you endeavor to vary curves as best you can, your signature habits lurk in the background,
+challenging your efforts. Even matching randomness can be quite difficult!"/>
+            <ImageView
+                android:id="@+id/c_helpImage2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="6sp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ScoreIncrease1"/>
+            <TextView
+                android:id="@+id/c_helpTextTipsHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+		        android:paddingLeft="30sp"
+                android:paddingBottom="4sp"
+                android:adjustViewBounds="true"
+                android:textColor="#BDC2E6"
+                android:text=
+"\nGameplay Tips"/>
+            <TextView
+                android:id="@+id/c_helpText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+		        android:paddingLeft="8sp"
+                android:paddingRight="4sp"
+                android:paddingBottom="4sp"
+                android:adjustViewBounds="true"
+                android:textColor="#D2D8FF"
+                android:text=
+"\n \u25C9 Darkening colors indicate a pattern in your directional flow; change, and colors brighten. 
+\n\n \u25C9 When doodling reverts to signature 'you-ness', pause to reset; even switch drawing hand. 
+\n\n \u25C9 'Highlight Habits' lets you see your patterns amidst the noise; heavier highlighting shows more prominent patterns.
+\n\n \u25C9 Try scribbling &quot;randomly&quot;, with little effort. After each play, observe patterns, then continue. How do these drawings evolve?"/>   
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/c_giveFeedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+	        android:textAllCaps="false"
+            android:paddingLeft="30sp"
+            android:paddingTop="20sp"
+            android:paddingBottom="10sp"
+            android:textSize="20sp"
+            android:textColor="#09FFE5"
+            android:text="Give Feedback"/>
+    </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

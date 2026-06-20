@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+	        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:adjustViewBounds="true"
+                android:textColor="#D2D8FF"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="20sp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ScoreIncrease1"
+                android:contentDescription="Score examples" />
+	        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+		        android:paddingLeft="8sp"
+                android:paddingRight="2sp"
+                android:paddingBottom="12sp"
+                android:adjustViewBounds="true"
+                android:textColor="#D2D8FF"
+                android:text=
+"\nDrawing is free-form.
+\nThe goal is to draw a continuous curve, varying its directional flow, changing how it changes. Done well, this creates intuitively complex drawings.
+\n\nScores range 0 to 200: from no variation (a straight line, or circle), to optimally varied shapes.
+A random, truly mindless scribbler - lacking both intent and habit - averages 100.
+\n\nHuman scores span a narrower range, roughly 80 to 120. Effortless 'random scribble' attempts typically reach 80; yet surpassing 120 is rare, as subtle doodling defaults inevitably creep into our scribbling.
+\n\nWhile you endeavor to vary curves as best you can, your signature habits lurk in the background,
+challenging your efforts. Even matching randomness can be quite difficult!"/>
+	        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+		        android:paddingLeft="8sp"
+                android:paddingRight="2sp"
+                android:paddingBottom="12sp"
+                android:adjustViewBounds="true"
+                android:textColor="#BDE6C2"
+                android:text=
+"Tip: Alternate loose focus scribbling, and intentional changes, until these modes merge into continual variation."/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="6sp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ScoreIncrease2"
+                android:contentDescription="Score examples" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="6sp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ScoreIncrease3"
+                android:contentDescription="Score examples" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/c_giveFeedback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+	            android:textAllCaps="false"
+                android:paddingLeft="30sp"
+                android:paddingTop="10sp"
+                android:textSize="30sp"
+                android:textColor="#09FFE5"
+                android:text="Rate and Review"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+		        android:paddingLeft="8sp"
+                android:paddingBottom="4sp"
+                android:adjustViewBounds="true"
+                android:textColor="#BDE6C2"
+                android:text=
+"\nHow does scoring work?"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+		        android:paddingLeft="8sp"
+                android:paddingRight="4sp"
+                android:paddingBottom="4sp"
+                android:adjustViewBounds="true"
+                android:textColor="#D2D8FF"
+                android:text=
+"\nThis game strives to be intuitive, playable with a simple instruction like &#34;vary your drawing&#34;. Yet, as you scribble a long, complex curve - trying your best - is the score truly accurate? 
+ \n\nFor transparency, the scoring algorithm is published, and the full game is also open-source:"/> 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/c_openSource"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+	            android:textAllCaps="false"
+                android:paddingLeft="8sp"
+                android:textSize="16sp"
+                android:textColor="#09FFE5"
+                android:text="See MovePredictionEngine on EmptySpace206 github"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+		        android:paddingLeft="8sp"
+                android:paddingBottom="4sp"
+                android:adjustViewBounds="true"
+                android:textColor="#BDE6C2"
+                android:text=
+"\nSummary"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+		        android:paddingLeft="8sp"
+                android:paddingRight="4sp"
+                android:adjustViewBounds="true"
+                android:textColor="#D2D8FF"
+                android:text=
+"The game tracks your drawing as a series of directional moves. Moves are 360\u00B0 gradients, weighted 1.0 in the direction moved, down to -1.0 at 180\u00B0 opposite. E.g. 45\u00B0 from direction moved = 0.5, 135\u00B0 = -0.5, 90\u00B0 = 0.
+\n\nIt predicts each new move from the full series (the drawing). A move in exactly the predicted direction gets the max penalty; at 180\u00B0 opposite, max bonus.
+\n\nPredicted moves are best fit to the existing series; moves are scored by how much they diverge from it.\n"/> 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/Moves"
+                android:contentDescription="Move example" />      
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+		        android:paddingLeft="8sp"
+                android:paddingRight="4sp"
+                android:adjustViewBounds="true"
+                android:textColor="#D2D8FF"
+                android:text=
+"A 4-move series, and next predicted move with bonus and penalty weights. Prediction weights can be different than move weights (here, they're more flat), but remain symmetric."/>         
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+		        android:paddingLeft="8sp"
+                android:paddingBottom="4sp"
+                android:adjustViewBounds="true"
+                android:textColor="#BDE6C2"
+                android:text=
+"\n\nMisc Notes"/>         
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+		        android:paddingLeft="8sp"
+                android:paddingBottom="4sp"
+                android:adjustViewBounds="true"
+                android:textColor="#BDE6C2"
+                android:text=
+"\nAngle adjustment"/>               
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+		        android:paddingLeft="8sp"
+                android:paddingRight="4sp"
+                android:paddingBottom="4sp"
+                android:adjustViewBounds="true"
+                android:textColor="#D2D8FF"
+                android:text=
+"With 'Pure' mode off, moves are adjusted by their relative angle with the prior 2 moves, to mitigate a natural difficulty in making sharper angles.
+\n\nIt uses the contraharmonic mean (shown), where X is the angle with move-1, and Y angle with move-2. [0,1] maps to [0,180] degrees."/>
+          <ImageView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:adjustViewBounds="true"
+              android:src="@drawable/AngleVirtualization"
+              android:contentDescription="Virtualization"/>
+          <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+		        android:paddingLeft="8sp"
+                android:paddingBottom="4sp"
+                android:adjustViewBounds="true"
+                android:textColor="#BDE6C2"
+                android:text=
+"\nVisual smoothing"/>   
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+		        android:paddingLeft="8sp"
+                android:paddingRight="4sp"
+                android:paddingBottom="4sp"
+                android:adjustViewBounds="true"
+                android:textColor="#D2D8FF"
+                android:text=
+"Line brightness reflects the score of the last 4 moves. Brighter lines indicate higher scores, darker lower scores.
+\n\nLine coloring averages the relative angle of the last 4 grid moves (except in the Tutorial). This smoothes it out, making it more useful. The moves themselves are unchanged. 
+\n\nThough the scoring engine tracks directional change, an emergent property is that relative angle variation (and thus color variation) is the key to scoring."/>   
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+		        android:paddingLeft="8sp"
+                android:paddingBottom="4sp"
+                android:adjustViewBounds="true"
+                android:textColor="#BDE6C2"
+                android:text=
+"\nScore calculation"/>              
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+		        android:paddingLeft="8sp"
+                android:paddingRight="4sp"
+                android:paddingBottom="4sp"
+                android:adjustViewBounds="true"
+                android:textColor="#D2D8FF"
+                android:text=
+"The final score is calculated as:
+\n100 * (sum(bonuses) / sum(penalties)), IF bonuses &lt; penalties; ELSE 100 * (2 - (sum(penalties) / sum(bonuses))).
+\nThis makes scores symmetric around 100, where bonuses = penalties.\n"/> 
+    </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

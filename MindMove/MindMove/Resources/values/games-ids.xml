@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Google Play game services IDs. Save this file as res/values/games-ids.xml in your project.-->
+<resources>
+  <!--app_id-->
+  <string name="app_id" translatable="false">776497822928</string>
+  <!--package_name-->
+  <string name="package_name" translatable="false">com.minimalistapps.MindMove</string>
+  <!--achievement Randomizer-->
+  <string name="achievement_randomizer" translatable="false">CgkI0PmB18wWEAIQAw</string>
+  <!--achievement Skilled Scribbler-->
+  <string name="achievement_skilled_scribbler" translatable="false">CgkI0PmB18wWEAIQBA</string>
+  <!--achievement Dynamic Doodler-->
+  <string name="achievement_dynamic_doodler" translatable="false">CgkI0PmB18wWEAIQBQ</string>
+  <!--achievement Unbound Fluidity-->
+  <string name="achievement_unbound_fluidity" translatable="false">CgkI0PmB18wWEAIQBg</string>
+  <!--achievement Endless Change: Oceans-->
+  <string name="achievement_endless_change_oceans" translatable="false">CgkI0PmB18wWEAIQBw</string>
+  <!--achievement Storm Braver-->
+  <string name="achievement_storm_braver" translatable="false">CgkI0PmB18wWEAIQCA</string>
+  <!--achievement Void Survivor-->
+  <string name="achievement_void_survivor" translatable="false">CgkI0PmB18wWEAIQCQ</string>
+  <!--achievement Chaos Champ-->
+  <string name="achievement_chaos_champ" translatable="false">CgkI0PmB18wWEAIQCg</string>
+  <!--achievement Conqueror of Voids-->
+  <string name="achievement_conqueror_of_voids" translatable="false">CgkI0PmB18wWEAIQCw</string>
+  <!--achievement Silencer of the Abyss-->
+  <string name="achievement_silencer_of_the_abyss" translatable="false">CgkI0PmB18wWEAIQDA</string>
+  <!--achievement Conscious Changer-->
+  <string name="achievement_conscious_changer" translatable="false">CgkI0PmB18wWEAIQDw</string>
+  <!--achievement Emerging Change-->
+  <string name="achievement_emerging_change" translatable="false">CgkI0PmB18wWEAIQEA</string>
+  <!--achievement Move Like Water-->
+  <string name="achievement_move_like_water" translatable="false">CgkI0PmB18wWEAIQEg</string>
+  <!--achievement Endless Change: Droplets-->
+  <string name="achievement_endless_change_droplets" translatable="false">CgkI0PmB18wWEAIQGA</string>
+  <!--achievement Endless Change: Streams-->
+  <string name="achievement_endless_change_streams" translatable="false">CgkI0PmB18wWEAIQGQ</string>
+  <!--achievement Endless Change: Rivers-->
+  <string name="achievement_endless_change_rivers" translatable="false">CgkI0PmB18wWEAIQGg</string>
+  <!--leaderboard Mind Stream-->
+  <string name="leaderboard_mind_stream" translatable="false">CgkI0PmB18wWEAIQGw</string>
+  <!--leaderboard Void Storm-->
+  <string name="leaderboard_void_storm" translatable="false">CgkI0PmB18wWEAIQHA</string>
+  <!--leaderboard Ring of Fluidity-->
+  <string name="leaderboard_ring_of_fluidity" translatable="false">CgkI0PmB18wWEAIQHg</string>
+  <!--leaderboard Change Challenge-->
+  <string name="leaderboard_change_challenge" translatable="false">CgkI0PmB18wWEAIQHw</string>
+  <!--leaderboard Configurations (Long)-->
+  <string name="leaderboard_configurations_long" translatable="false">CgkI0PmB18wWEAIQIQ</string>
+  <!--leaderboard 100+ Avg Streak (Mind Stream + Configurations)-->
+  <string name="leaderboard_100_avg_streak_mind_stream__configurations" translatable="false">CgkI0PmB18wWEAIQIA</string>
+</resources>
