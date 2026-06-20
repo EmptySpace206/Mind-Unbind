@@ -1,4 +1,4 @@
-This is the source for the game Mind Unbind. 
+This is the source for the game Mind Unbind. You may expand upon this game, or use concepts or code for other purposes. 
 
 Mind Unbind is an abstract, free-form drawing game. 
 The goal is to draw a continuous curve, varying its directional flow, changing how it changes.
