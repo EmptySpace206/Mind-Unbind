@@ -1,4 +1,4 @@
-This is a open-source version of the game Mind Unbind. Currently, only the core scoring algorithm - MovePredictionEngine - is published.
+This is the source for the game Mind Unbind. 
 
 Mind Unbind is an abstract, free-form drawing game. 
 The goal is to draw a continuous curve, varying its directional flow, changing how it changes.
