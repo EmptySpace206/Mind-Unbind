@@ -221,9 +221,10 @@ namespace MindMove
         private int GetTargetStateAndWeights(double degrees, out double t1Weight, out double t2Weight)
         {
             if (degrees == BaseMoveWeights.CircularRange) { degrees = 0; } // Wrap around from 360 to 0
-            int t = (int)Math.Floor(BaseMoveWeights.StateCount * (degrees / BaseMoveWeights.CircularRange));
-            t1Weight = 1 - (((double)(t+1) / (double)BaseMoveWeights.StateCount) - (degrees / BaseMoveWeights.CircularRange)); 
-            t2Weight = 1 - t1Weight;
+            double p = BaseMoveWeights.StateCount * (degrees / BaseMoveWeights.CircularRange);
+            int t = (int)Math.Floor(p);
+            t2Weight = p - t;          // fractional part
+            t1Weight = 1 - t2Weight;
             return t;
         }
 

@@ -188,10 +188,12 @@ class MovePredictionEngine:
     def get_target_state_and_weights(self, degrees):
         if degrees == BaseMoveWeights.CircularRange:
             degrees = 0
-        t = int(math.floor(BaseMoveWeights.StateCount * (degrees / BaseMoveWeights.CircularRange)))
-        t1_weight = 1 - (((t + 1) / BaseMoveWeights.StateCount) - (degrees / BaseMoveWeights.CircularRange))
-        t2_weight = 1 - t1_weight
+        p = BaseMoveWeights.StateCount * (degrees / BaseMoveWeights.CircularRange)
+        t = int(math.floor(p))
+        t2_weight = p - t          # fractional part
+        t1_weight = 1 - t2_weight
         return t, t1_weight, t2_weight
+
 
     @staticmethod
     def test_score_move_series(degrees):
@@ -278,37 +280,37 @@ if __name__ == "__main__":
     # Demos with 30-move 'games'
 
     # A rough circle (moves ~30 degrees apart, clockwise)
-    # Scores 3.3
+    # Scores 3.0
     moves = [0, 30, 62, 89, 120, 147, 181, 210, 233, 270, 300, 330, 359, 29, 63, 95, 120, 151, 182, 211, 241, 270, 300, 325, 0, 29, 58, 90, 118, 146]
     score = MovePredictionEngine.test_score_move_series(moves)
     draw_moves(moves, score)
 
     # A spiral (add 3 degrees each move, clockwise)
-    # Scores 62.18
+    # Scores 62.96
     moves = [0, 3, 9, 18, 30, 45, 63, 84, 108, 135, 165, 198, 234, 273, 315, 0, 48, 99, 154, 214, 287, 353, 62, 134, 209, 287, 8, 92, 179, 269]
     score = MovePredictionEngine.test_score_move_series(moves)
     draw_moves(moves, score)
 
     # Roughly back-forth, then roughly straight (repeated 3x)
-    # Scores 39.67
+    # Scores 39.65
     moves = [270, 100, 280, 95, 285, 97, 90, 93, 95, 91, 90, 270, 93, 280, 101, 283, 280, 277, 280, 285, 105, 280, 102, 277, 98, 95, 90, 100, 97, 90]
     score = MovePredictionEngine.test_score_move_series(moves)
     draw_moves(moves, score)
 
     # Above, but change to a rough boxes for final 10 moves
-    # Scores 72.96
+    # Scores 71.96
     moves = [270, 100, 280, 95, 285, 97, 90, 93, 95, 91, 90, 270, 93, 280, 101, 283, 280, 277, 280, 10, 100, 185, 280, 15, 100, 185, 275, 0, 90, 180]
     score = MovePredictionEngine.test_score_move_series(moves)
     draw_moves(moves, score)
 
     # High variation in angle changes
-    # Scores 125.36
+    # Scores 127.48
     moves = [290, 330, 180, 240, 80, 90, 135, 135, 85, 230, 0, 125, 270, 100, 235, 40, 30, 75, 105, 0, 110, 210, 315, 345, 125, 150, 155, 280, 30, 50]
     score = MovePredictionEngine.test_score_move_series(moves)
     draw_moves(moves, score)
 
     # Higher variation in angle changes
-    # Scores 140.06
+    # Scores 138.29
     moves = [90, 110, 30, 200, 155, 135, 330, 175, 325, 330, 315, 350, 25, 220, 60, 300, 300, 50, 45, 15, 200, 100, 320, 120, 330, 150, 50, 300, 220, 120]
     score = MovePredictionEngine.test_score_move_series(moves)
     draw_moves(moves, score)
