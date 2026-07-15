@@ -546,27 +546,37 @@ namespace MindMove.Cocos
 
         string GetPoemText(out float fontSize)
         {
-            string text = "◑◐   Mirror of Mind   ◑◐";
+            string text = "~ Scribbling Game ~\n";
 
             fontSize = InstructionSize;
-            text += "\n\n'Draw, vary curve flow, distinctly as is possible'";
-            text += "\nThe game's space nearly empty... the obstacle?";
-            text += "\nThat's your own patterns & biases: the habitual";
 
-            text += "\n\nOnto the screen, your mental streams manifest";
-            text += "\nA score up top, your change-ability put to test";
-            text += "\nFree as intended - or would random play best?";
+            text += "\nCandescent ribbons in ruby to teal hues";
+            text += "\nstream and curl from here to the canvas -";
 
-            text += "\n\nThis game mirrors our invisible habits of mind";
-            text += "\nSometimes useful grooves ingrained over time";
-            text += "\n— How can 'you' make its cyclic paths Unbind?";
+            text += "\n\na sprawl of loops, jitters, and lines";
+            text += "\nstriving for the shape of randomness.";
+
+            text += "\n\nThe hand flits in a dance of inner jolts,";
+            text += "\na dragonfly-like maze of woven strokes;";
+
+            text += "\n\nstill, this torrent moves along grooves";
+            text += "\nand doodling funnels into form—";
+
+            text += "\n\nthe bulbed curves, curly-ques in threes;";
+            text += "\ncadence of long stripes, little squiggles;";
+
+            text += "\n\nthe corners are barely trodden,";
+            text += "\nan odd bias against diagonals—";
+
+            text += "\n\nis scribbling then a slippery game,";
+            text += "\nas signature shape continually flows?";
 
             return text;
         }
 
         void ShowPoemOverlay()
         {
-            float centerY = mTitleBackgroundCircle.BoundingRect.Center.Y - mLayer.ContentSize.Height * 0.02f;
+            float centerY = mTitleBackgroundCircle.BoundingRect.Center.Y - mLayer.ContentSize.Height * 0.067f;
 
             mTutorialOverlay = new DrawNode();
             mLayer.AddChild(mTutorialOverlay);
@@ -574,11 +584,11 @@ namespace MindMove.Cocos
                 from: new DrawPoint(0.02f * mLayer.ContentSize.Width, centerY),
                 to: new DrawPoint(mLayer.ContentSize.Width * 0.98f, centerY),
                 color: mBrightBackground,
-                lineWidth: (mLayer.ContentSize.Height * DemoTop * 0.4f));
+                lineWidth: (mLayer.ContentSize.Height * DemoTop * 0.5f));
 
             float fontSize;
             string headerText = GetPoemText(out fontSize);
-            mTutorialHeaderText = new DrawLabel(headerText, "Arial", fontSize * 1.067f);
+            mTutorialHeaderText = new DrawLabel(headerText, "Arial", fontSize * 1f);
             mTutorialHeaderText.Color = ThemeColors.AdjustColorsForMultipler(1.1, mThemeColors.Text);
             mTutorialHeaderText.PositionX = mLayer.ContentSize.Width * 0.5f;
             mTutorialHeaderText.PositionY = centerY;
