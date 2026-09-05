@@ -45,8 +45,6 @@ namespace MindMove
 
             SoundEffects = new Sound();
 
-            SharedParams.UpdateUnlocks();
-
             // Init the game
             SetContentView(Resource.Layout.activity_main);
 
