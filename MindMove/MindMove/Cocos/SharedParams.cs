@@ -107,6 +107,31 @@ namespace MindMove.Cocos
 
         public static bool IsUnlockedVoidStorm = false;
         public static bool IsUnlockedContinuity = false;
+        public static int TotalTitleUnlocks = 0;
+        public const int NumTitleUnlocksPerAward = 3;
+
+        public static void UpdateUnlocks()
+        {
+            double mindStreamBest = MainActivity.GetSavedIntWithDefaultValue(0, StandardBestScore) / 100.0;
+            double voidStormBest = MainActivity.GetSavedIntWithDefaultValue(0, VoidStormBestScore) / 100.0;
+            double ringBest = MainActivity.GetSavedIntWithDefaultValue(0, BestTargetAnglesScore) / 100.0;
+            double continuityBest = MainActivity.GetSavedIntWithDefaultValue(0, ContinuityBestScore) / 100.0;
+
+            IsUnlockedVoidStorm = mindStreamBest >= VoidStormUnlock;
+            IsUnlockedContinuity = mindStreamBest >= ContinuityUnlock;
+        }
+
+        public static int GetNumUnlockedColorThemes()
+        {
+            if (TotalTitleUnlocks >= 11)
+            {
+                return TotalTitleUnlocks + NumTitleUnlocksPerAward + 1;
+            }
+            else
+            {
+                return 3 * ((TotalTitleUnlocks / NumTitleUnlocksPerAward) + 1);
+            }
+        }
 
         public static double GetRelativeAngle(double angle1, double angle2)
         {
