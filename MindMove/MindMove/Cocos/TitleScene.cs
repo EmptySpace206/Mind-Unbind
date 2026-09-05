@@ -391,8 +391,6 @@ namespace MindMove.Cocos
                 ThemeColors.ClearSingleRandomColorSettings();
                 int indexFinalPickerButton = ThemeColors.GetNumColorThemes();
 
-                int unlockedColorCount = SharedParams.GetNumUnlockedColorThemes();
-
                 float radius = ColorThemeButtonRadius * ColorThemeButtonRadiusMult;
                 for (int j = 0; j < mColorPickerButtonRelativeCoords.Count; j++)
                 {
@@ -401,12 +399,9 @@ namespace MindMove.Cocos
                         if (location.X > mColorPickerButtonRelativeCoords[j].X - radius && location.X < mColorPickerButtonRelativeCoords[j].X + radius &&
                             location.Y > mColorPickerButtonRelativeCoords[j].Y - radius && location.Y < mColorPickerButtonRelativeCoords[j].Y + radius)
                         {
-                            if (j < unlockedColorCount)
-                            {
-                                mThemeColorIndex = mColorPickerThemeColors[j].GetColorIndex();
-                                MainActivity.SaveIntValue(mThemeColorIndex, ThemeColorFile);
-                                RefreshColorPickerOverlay();
-                            }
+                            mThemeColorIndex = mColorPickerThemeColors[j].GetColorIndex();
+                            MainActivity.SaveIntValue(mThemeColorIndex, ThemeColorFile);
+                            RefreshColorPickerOverlay();
                             return;
                         }
                     }
@@ -652,7 +647,6 @@ namespace MindMove.Cocos
             int randomButtonIndex = 0;
 
             int numColorRows = (int)Math.Ceiling((double)numThemes / 3.0);
-            int numRowsUnlocked = SharedParams.GetNumUnlockedColorThemes() / 3;
 
             int numPerRow = 3;
             const float yBase = 0.9383f;
@@ -681,16 +675,6 @@ namespace MindMove.Cocos
                 mColorPickerButtonRelativeCoords.Add(new DrawPoint(x * mLayer.ContentSize.Width, y * mLayer.ContentSize.Height));
                 mColorPickerThemeColors.Add(tc);
                 mColorPickerButtons.Add(button);
-
-                if (numRowsUnlocked < numColorRows && j == (numRowsUnlocked * numPerRow) - 1)
-                {
-                    float y0 = (y - (1f - yBase)) * mLayer.ContentSize.Height;
-                    button.DrawLine(
-                        from: new DrawPoint(mLayer.ContentSize.Width * 0.1f, y0),
-                        to: new DrawPoint(mLayer.ContentSize.Width * 0.9f, y0),
-                        color: mThemeColors.AveragedColor,
-                        lineWidth: 2 * mSF);
-                }
             }
 
             if (mThemeColors.IsRandomColorTheme())
@@ -745,37 +729,6 @@ namespace MindMove.Cocos
                     mColorPickerTextItems.Add(save2ColorText);
                 }
             }
-            
-            string text = "";
-            float yOffset = (mLayer.ContentSize.Height * 0.033f);
-            float instructionFontSize = InstructionSize;
-            if (numRowsUnlocked < numColorRows)
-            {
-                text += "Unlock another row of themes";
-                text += "\nfor every " + SharedParams.NumTitleUnlocksPerAward + " titles achieved.\n\n";
-                text += "Titles achieved: " + SharedParams.TotalTitleUnlocks;
-                yOffset += InstructionSize*4;
-                instructionFontSize *= 1.3f;
-
-                DrawPoint ptUnlock = new DrawPoint(mLayer.ContentSize.Width * 0.5f, yOffset + (ColorPickerBottom * mLayer.ContentSize.Height));
-
-                mUnlockColorThemesButton = new DrawNode();
-                mLayer.AddChild(mUnlockColorThemesButton);
-                mUnlockColorThemesButton.DrawLine(
-                    from: new DrawPoint(0, ptUnlock.Y),
-                    to: new DrawPoint(mLayer.ContentSize.Width, ptUnlock.Y),
-                    color: new DrawColor(0, 0, 0, 128),
-                    lineWidth: instructionFontSize * 4);
-                mColorPickerButtonRelativeCoords.Add(ptUnlock);
-            }
-
-            DrawLabel colorPickerText = new DrawLabel(text, "Arial", instructionFontSize);
-            colorPickerText.Color = ThemeColors.AdjustColorsForMultipler(1.1, mThemeColors.TextColor1);
-            colorPickerText.PositionX = mLayer.ContentSize.Width * 0.5f;
-            colorPickerText.PositionY = yOffset + (ColorPickerBottom * mLayer.ContentSize.Height);
-            colorPickerText.HorizontalAlignment = CCTextAlignment.Center;
-            mLayer.AddChild(colorPickerText);
-            mColorPickerTextItems.Add(colorPickerText);
         }
 
         private void RefreshColorPickerOverlay()

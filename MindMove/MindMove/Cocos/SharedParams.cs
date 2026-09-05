@@ -107,49 +107,6 @@ namespace MindMove.Cocos
 
         public static bool IsUnlockedVoidStorm = false;
         public static bool IsUnlockedContinuity = false;
-        public static int TotalTitleUnlocks = 0;
-        public const int NumTitleUnlocksPerAward = 3;
-
-        public static void UpdateUnlocks()
-        {
-            double mindStreamBest = MainActivity.GetSavedIntWithDefaultValue(0, StandardBestScore) / 100.0;
-            double voidStormBest = MainActivity.GetSavedIntWithDefaultValue(0, VoidStormBestScore) / 100.0;
-            double ringBest = MainActivity.GetSavedIntWithDefaultValue(0, BestTargetAnglesScore) / 100.0;
-            double continuityBest = MainActivity.GetSavedIntWithDefaultValue(0, ContinuityBestScore) / 100.0;
-
-            IsUnlockedVoidStorm = mindStreamBest >= VoidStormUnlock;
-            IsUnlockedContinuity = mindStreamBest >= ContinuityUnlock;
-
-            TotalTitleUnlocks = 0;
-            if (mindStreamBest >= RankBasic_1Score) { TotalTitleUnlocks++; }
-            if (mindStreamBest >= RankBasic_2Score) { TotalTitleUnlocks++; }
-            if (mindStreamBest >= RankBasic_3Score) { TotalTitleUnlocks++; }
-            if (mindStreamBest >= RankBasic_4Score) { TotalTitleUnlocks++; }
-
-            if (voidStormBest >= RankVoid_2Score) { TotalTitleUnlocks++; }
-            if (voidStormBest >= RankVoid_3Score) { TotalTitleUnlocks++; }
-            if (voidStormBest >= RankVoid_4Score) { TotalTitleUnlocks++; }
-            if (voidStormBest >= RankVoid_5Score) { TotalTitleUnlocks++; }
-
-            if (ringBest >= RankBasic_5Score) { TotalTitleUnlocks++; }
-
-            if (continuityBest >= Continuity_1Score) { TotalTitleUnlocks++; }
-            if (continuityBest >= Continuity_2Score) { TotalTitleUnlocks++; }
-            if (continuityBest >= Continuity_3Score) { TotalTitleUnlocks++; }
-            if (continuityBest >= Continuity_4Score) { TotalTitleUnlocks++; }
-        }
-
-        public static int GetNumUnlockedColorThemes()
-        {
-            if (TotalTitleUnlocks >= 11)
-            {
-                return TotalTitleUnlocks + NumTitleUnlocksPerAward + 1;
-            }
-            else
-            {
-                return 3 * ((TotalTitleUnlocks / NumTitleUnlocksPerAward) + 1);
-            }
-        }
 
         public static double GetRelativeAngle(double angle1, double angle2)
         {

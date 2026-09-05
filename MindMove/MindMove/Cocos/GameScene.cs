@@ -2143,7 +2143,7 @@ namespace MindMove.Cocos
 
             if (mPlayMode != PlayMode.VoidStormV2)
             {
-                DrawLabel conseq100PlusAvg = new DrawLabel("", "Arial", MediumFontSize, CCLabelFormat.SystemFont);
+                DrawLabel conseq100PlusAvg = new DrawLabel("", "Arial", LargeFontSize, CCLabelFormat.SystemFont);
                 conseq100PlusAvg.Color = new CCColor3B(mThemeColors.TextColor2);
                 conseq100PlusAvg.PositionX = mLayer.ContentSize.Width * 0.5f;
                 conseq100PlusAvg.PositionY = mLayer.ContentSize.Height * 0.0333f;
@@ -2510,12 +2510,11 @@ namespace MindMove.Cocos
                 }
                 else
                 {
-                    int numColorThemes = SharedParams.GetNumUnlockedColorThemes();
                     int index = mThemeColors.GetColorIndex();
 
                     index++;
                     if (ThemeColors.IsRandomColorThemeIndex(index)) { index++; } // Skip random color theme
-                    if (index >= numColorThemes) { index = 0; }
+                    if (index >= ThemeColors.GetNumColorThemes()) { index = 0; }
 
                     mThemeColors = new ThemeColors(index);
                 }
@@ -3089,8 +3088,6 @@ namespace MindMove.Cocos
                     mReachedTutorialFinishScore = true;
                 }
 
-                bool updateTitleUnlockCount = false;
-
                 if (mPlayMode == PlayMode.Continuity)
                 {
                     mContinuitySeriesScores.Add(mFinalScore);
@@ -3111,15 +3108,6 @@ namespace MindMove.Cocos
                                 mContinuityLongSeriesBestScore = seriesAverage * 100;
                                 MainActivity.SaveIntValue((int)(100 * mContinuityLongSeriesBestScore), SharedParams.ContinuityBestScoreLongSeries);
                             }
-
-                            else if (oldBestScore < SharedParams.Continuity_3Score && mContinuityLongSeriesBestScore >= SharedParams.Continuity_3Score)
-                            {
-                                updateTitleUnlockCount = true;
-                            }
-                            else if (oldBestScore < SharedParams.Continuity_4Score && mContinuityLongSeriesBestScore >= SharedParams.Continuity_4Score)
-                            {
-                                updateTitleUnlockCount = true;
-                            }
                         }
                         else
                         {
@@ -3129,15 +3117,6 @@ namespace MindMove.Cocos
                             {
                                 mContinuitySeriesBestScore = seriesAverage * 100;
                                 MainActivity.SaveIntValue((int)(100 * mContinuitySeriesBestScore), SharedParams.ContinuityBestScore);
-                            }
-
-                            if (oldBestScore < SharedParams.Continuity_1Score && mContinuitySeriesBestScore >= SharedParams.Continuity_1Score)
-                            {
-                                updateTitleUnlockCount = true;
-                            }
-                            else if (oldBestScore < SharedParams.Continuity_2Score && mContinuitySeriesBestScore >= SharedParams.Continuity_2Score)
-                            {
-                                updateTitleUnlockCount = true;
                             }
                         }
 
@@ -3164,22 +3143,18 @@ namespace MindMove.Cocos
                     if (oldBestScore < SharedParams.RankVoid_2Score && mVoidStormBestScore >= SharedParams.RankVoid_2Score)
                     {
                         newAch = true;
-                        updateTitleUnlockCount = true;
                     }
                     if (oldBestScore < SharedParams.RankVoid_3Score && mVoidStormBestScore >= SharedParams.RankVoid_3Score)
                     {
                         newAch = true;
-                        updateTitleUnlockCount = true;
                     }
                     if (oldBestScore < SharedParams.RankVoid_4Score && mVoidStormBestScore >= SharedParams.RankVoid_4Score)
                     {
                         newAch = true;
-                        updateTitleUnlockCount = true;
                     }
                     if (oldBestScore < SharedParams.RankVoid_5Score && mVoidStormBestScore >= SharedParams.RankVoid_5Score)
                     {
                         newAch = true;
-                        updateTitleUnlockCount = true;
                     }
 
                     if (newAch)
@@ -3224,42 +3199,31 @@ namespace MindMove.Cocos
                     if (oldBestScore < SharedParams.RankBasic_1Score && mBestScore >= SharedParams.RankBasic_1Score)
                     {
                         newAch = true;
-                        updateTitleUnlockCount = true;
                     }
                     if ((oldBestScore < SharedParams.RankBasic_2Score) && mBestScore >= SharedParams.RankBasic_2Score)
                     {
                         newAch = true;
-                        updateTitleUnlockCount = true;
                     }
                     if ((oldBestScore < SharedParams.RankBasic_3Score) && mBestScore >= SharedParams.RankBasic_3Score)
                     {
                         newAch = true;
-                        updateTitleUnlockCount = true;
-                    }
+                        }
                     if ((oldBestScore < SharedParams.ContinuityUnlock) && mBestScore >= SharedParams.ContinuityUnlock)
                     {
-                        updateTitleUnlockCount = true;
                     }
                     if (mLongGameEnabled && (oldBestTargetAnglesScore < SharedParams.RankBasic_4Score) && mBestLongGameScore >= SharedParams.RankBasic_4Score)
                     {
                         newAch = true;
-                        updateTitleUnlockCount = true;
                     }
                     if (mLongGameEnabled &&  (oldBestTargetAnglesScore < SharedParams.RankBasic_5Score) && mBestLongGameScore >= SharedParams.RankBasic_5Score)
                     {
                         newAch = true;
-                        updateTitleUnlockCount = true;
                     }
 
                     if (newAch)
                     {
                         mRedrawRankLabel = true;
                     }
-                }
-
-                if (updateTitleUnlockCount)
-                {
-                    SharedParams.UpdateUnlocks();
                 }
             }
         }
