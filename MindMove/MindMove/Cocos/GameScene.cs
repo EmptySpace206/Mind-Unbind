@@ -2855,6 +2855,11 @@ namespace MindMove.Cocos
                 mResetMineCenters = false;
             }
 
+            if (IsInContinuitySeries() && mEndRoundEarly)
+            {
+                mIsContinuityStarted = false;
+            }
+
             StartNewRound();
         }
 
