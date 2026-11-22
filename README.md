@@ -5,23 +5,23 @@ The goal is to draw a continuous curve, varying its directional flow, changing h
 
 The obstacle? The player's own doodling habits, which make this an unexpectedly challenging game. 
 
-The score indicates how the player's efforts at variation overcame repetitive tendencies. 100 is a key threshold: as good as random, unintentional scribbling. 
+The score indicates how the player's efforts at variation overcame repetitive tendencies. A score of 0 = parity with random, unintentional scribbling. 
 
 Will your mindful changes perform better than mindlessness? 
 
 ------------
 Note that the game segments the continuous curve (like the drawings below) into a series of discrete 'moves', which MovePredictionEngine processes. 
 
-<img width="1080" height="1280" alt="ScoreIncrease1" src="https://github.com/user-attachments/assets/9f1f9cb8-ccd5-4367-85d7-a93c7ed0e1f4" />
+<img width="1075" height="1437" alt="ScoreIncrease1" src="https://github.com/user-attachments/assets/3d3f513f-4414-45ad-bf06-6eeb93f84d8c" />
 
-Scores range 0 to 200: from no variation (a straight line, or circle), to optimally varied shapes. A random, truly mindless scribbler - lacking both intent and habit - averages 100.
+Scores range -100 to 100: from no variation (a straight line, or circle), to optimally varied shapes. A random, truly mindless scribbler - lacking both intent and habit - averages 0.
 
-Human scores span a narrower range, roughly 80 to 120. Effortless 'random scribble' attempts typically reach 80; yet surpassing 120 is rare, as subtle doodling defaults inevitably creep into our scribbling.
+Human scores span a narrower range, roughly -20 to 20. Effortless 'random scribble' attempts typically reach -20; yet surpassing 20 is rare, as subtle doodling defaults inevitably creep into our scribbling.
 
 While you endeavor to vary curves as best you can, your signature habits lurk in the background, challenging your efforts. Even matching randomness can be quite difficult!
 
-<img width="1080" height="635" alt="ScoreIncrease2" src="https://github.com/user-attachments/assets/fbf8e0ff-20a1-4367-a729-3750a7454009" />
-<img width="1080" height="634" alt="ScoreIncrease3" src="https://github.com/user-attachments/assets/4fc2d5ad-67f9-4f58-9fb7-6f7adfd6eda0" />
+<img width="1078" height="712" alt="ScoreIncrease2" src="https://github.com/user-attachments/assets/14a78db2-5a4c-418c-9fe6-4d2d283524fb" />
+<img width="1078" height="712" alt="ScoreIncrease3" src="https://github.com/user-attachments/assets/d20418c7-fb4e-4ace-8af2-627a311db14a" />
 
 ------------
 ![MainExample](https://github.com/user-attachments/assets/8ff407e9-5e4a-4590-84b6-29496ffecd79)
