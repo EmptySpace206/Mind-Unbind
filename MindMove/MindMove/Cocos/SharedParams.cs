@@ -54,19 +54,21 @@ namespace MindMove.Cocos
         public const string RankBasic_4 = "Dynamic Doodler";
         public const string RankBasic_5 = "Continual Changer";
 
-        public const double RankVoid_0Score = 0;
-        public const double RankVoid_1Score = 90;
-        public const double RankVoid_2Score = 100;
-        public const double RankVoid_3Score = 110;
-        public const double RankVoid_4Score = 120;
-        public const double RankVoid_5Score = 130;
+        public const double BaseBestScore = -100;
 
-        public const double RankBasic_0Score = 0;
-        public const double RankBasic_1Score = 92;
-        public const double RankBasic_2Score = 100;
-        public const double RankBasic_3Score = 108;
-        public const double RankBasic_4Score = 112;
-        public const double RankBasic_5Score = 120;
+        public const double RankVoid_0Score = -100;
+        public const double RankVoid_1Score = -10;
+        public const double RankVoid_2Score = 0;
+        public const double RankVoid_3Score = 10;
+        public const double RankVoid_4Score = 20;
+        public const double RankVoid_5Score = 30;
+
+        public const double RankBasic_0Score = -100;
+        public const double RankBasic_1Score = -8;
+        public const double RankBasic_2Score = 0;
+        public const double RankBasic_3Score = 8;
+        public const double RankBasic_4Score = 12;
+        public const double RankBasic_5Score = 20;
 
         public const double RoBMUnlockBaseScore = RankBasic_3Score;
         public const double StormLevel1Score = RankVoid_2Score;
@@ -74,13 +76,13 @@ namespace MindMove.Cocos
         public const double StormLevel3Score = RankVoid_4Score;
         public const double StormLevel4Score = RankVoid_5Score;
 
-        public const double Continuity_1Score = 100;
-        public const double Continuity_2Score = 104;
-        public const double Continuity_3Score = 106;
-        public const double Continuity_4Score = 110;
+        public const double Continuity_1Score = 0;
+        public const double Continuity_2Score = 4;
+        public const double Continuity_3Score = 6;
+        public const double Continuity_4Score = 10;
 
-        public const double VoidStormUnlock = 100;
-        public const double ContinuityUnlock = 100;
+        public const double VoidStormUnlock = 0;
+        public const double ContinuityUnlock = 0;
         public const double ContinuityLongSeriesUnlock = Continuity_2Score;
 
         public const string StormLevel0 = "Void Looms";
@@ -112,10 +114,10 @@ namespace MindMove.Cocos
 
         public static void UpdateUnlocks()
         {
-            double mindStreamBest = MainActivity.GetSavedIntWithDefaultValue(0, StandardBestScore) / 100.0;
-            double voidStormBest = MainActivity.GetSavedIntWithDefaultValue(0, VoidStormBestScore) / 100.0;
-            double ringBest = MainActivity.GetSavedIntWithDefaultValue(0, BestTargetAnglesScore) / 100.0;
-            double continuityBest = MainActivity.GetSavedIntWithDefaultValue(0, ContinuityBestScore) / 100.0;
+            double mindStreamBest = MainActivity.GetSavedIntWithDefaultValue((int)SharedParams.BaseBestScore * 100, StandardBestScore) / 100.0;
+            double voidStormBest = MainActivity.GetSavedIntWithDefaultValue((int)SharedParams.BaseBestScore * 100, VoidStormBestScore) / 100.0;
+            double ringBest = MainActivity.GetSavedIntWithDefaultValue((int)SharedParams.BaseBestScore * 100, BestTargetAnglesScore) / 100.0;
+            double continuityBest = MainActivity.GetSavedIntWithDefaultValue((int)SharedParams.BaseBestScore * 100, ContinuityBestScore) / 100.0;
 
             IsUnlockedVoidStorm = mindStreamBest >= VoidStormUnlock;
             IsUnlockedContinuity = mindStreamBest >= ContinuityUnlock;

@@ -88,10 +88,10 @@ namespace MindMove.Cocos
 
         DrawColor mGuideBaseColor;
 
-        const double MinScoreForTutorialFinish = 75;
-        const double MinScoreForLeaderboard = 70;
+        const double MinScoreForTutorialFinish = -25;
+        const double MinScoreForLeaderboard = -30;
         bool mReachedTutorialFinishScore = false;
-        const double MinParticipationScore = 50;
+        const double MinParticipationScore = -50;
         bool mReachedParticipationScore = false;
 
         int mNumberOfFinishedPlaysThisSession = 0;
@@ -139,7 +139,7 @@ namespace MindMove.Cocos
         int ScoreCircleTimerDotCount;
         const float ScoreCircleTimerDotRadiusMult = 0.075f;
         float ScoreCircleTimerDotRadius;
-        const float ScoreFontSizeBase = 0.5833f;
+        const float ScoreFontSizeBase = 0.555f;
         float ScoreFontSize;
         DrawPoint mScoreCircleTop;
         bool mScoreFeedbackHidden = false;
@@ -157,7 +157,7 @@ namespace MindMove.Cocos
         const int NumIdleGlitterDots = 45;
         const int NumIdleGlitterDotsMuted = 22;
         const float IdleGlitterMutedRadiusMult = 0.75f;
-        const float GlitterEffect100PlusBoost = 1.2f;
+        const float GlitterEffectPositiveBoost = 1.2f;
 
         List<ScoredDraw> mScoredDraws; 
 
@@ -171,9 +171,9 @@ namespace MindMove.Cocos
         const int ContinuityGamesCount = 3;
         const int ContinuityGamesCount_Long = 4;
         readonly List<double> mContinuitySeriesScores = null;
-        double mContinuityLastSeriesScore = 0;
-        double mContinuitySeriesBestScore = 0;
-        double mContinuityLongSeriesBestScore = 0;
+        double mContinuityLastSeriesScore = SharedParams.BaseBestScore;
+        double mContinuitySeriesBestScore = SharedParams.BaseBestScore;
+        double mContinuityLongSeriesBestScore = SharedParams.BaseBestScore;
         bool mDelayContinuityGameStart = false;
 
         bool mLongContinuitySeries = false;
@@ -189,7 +189,7 @@ namespace MindMove.Cocos
         const string SumScores100Plus = "SumScores100Plus.xml";
         const string BestConseqGames100Plus = "BestConseqGames100Plus.xml";
         int mConseqGamesScoring100Plus = 0;
-        double mSumScores100Plus = 0;
+        double mSumScoresPositive = 0;
         int mBestConseqGamesScoring100Plus = 0;
         // End Conequitive games
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -211,9 +211,9 @@ namespace MindMove.Cocos
         DrawLabel mHeaderText;
 
         // For best and historical scores
-        double mBestScore;
-        double mVoidStormBestScore = 0;
-        double mBestLongGameScore = 0;
+        double mBestScore = SharedParams.BaseBestScore;
+        double mVoidStormBestScore = SharedParams.BaseBestScore;
+        double mBestLongGameScore = SharedParams.BaseBestScore;
         const string ReachedNormalScoreCircleSizeThreshold = "ReachedNormalScoreCircleSizeThresholdV1.xml";
         const string ReachedParticipationThreshold = "ReachedParticipationThresholdV1.xml";
         const string TargetAnglesEnabled = "TargetAnglesEnabled.xml";
@@ -1006,7 +1006,7 @@ namespace MindMove.Cocos
             {
                 if (mLastFinalScore > 1)
                 {
-                    timerDotRadiusMult *= (float)mLastFinalScore * GlitterEffect100PlusBoost;
+                    timerDotRadiusMult *= (float)mLastFinalScore * GlitterEffectPositiveBoost;
                     scoreCircleTimerDotRadius *= timerDotRadiusMult;
                 }
             }
@@ -1216,22 +1216,22 @@ namespace MindMove.Cocos
             {
                 if (mPlayMode == PlayMode.VoidStormV2)
                 {
-                    mVoidStormBestScore = MainActivity.GetSavedIntWithDefaultValue(0, SharedParams.VoidStormBestScore) / 100.0;
+                    mVoidStormBestScore = MainActivity.GetSavedIntWithDefaultValue((int)SharedParams.BaseBestScore, SharedParams.VoidStormBestScore) / 100.0;
                 }
                 else if (mPlayMode == PlayMode.Continuity)
                 {
-                    mContinuitySeriesBestScore = MainActivity.GetSavedIntWithDefaultValue(0, SharedParams.ContinuityBestScore) / 100.0;
-                    mContinuityLongSeriesBestScore = MainActivity.GetSavedIntWithDefaultValue(0, SharedParams.ContinuityBestScoreLongSeries) / 100.0;
+                    mContinuitySeriesBestScore = MainActivity.GetSavedIntWithDefaultValue((int)SharedParams.BaseBestScore * 100, SharedParams.ContinuityBestScore) / 100.0;
+                    mContinuityLongSeriesBestScore = MainActivity.GetSavedIntWithDefaultValue((int)SharedParams.BaseBestScore * 100, SharedParams.ContinuityBestScoreLongSeries) / 100.0;
                 }
                 else if (mPlayMode == PlayMode.Standard)
                 {
-                    mBestScore = MainActivity.GetSavedIntWithDefaultValue(0, SharedParams.StandardBestScore) / 100.0;
-                    mBestLongGameScore = MainActivity.GetSavedIntWithDefaultValue(0, SharedParams.BestTargetAnglesScore) / 100.0;
+                    mBestScore = MainActivity.GetSavedIntWithDefaultValue((int)SharedParams.BaseBestScore * 100, SharedParams.StandardBestScore) / 100.0;
+                    mBestLongGameScore = MainActivity.GetSavedIntWithDefaultValue((int)SharedParams.BaseBestScore * 100, SharedParams.BestTargetAnglesScore) / 100.0;
                 }
 
                 mConseqGamesScoring100Plus = MainActivity.GetSavedIntWithDefaultValue(0, ConseqGames100Plus);
                 mBestConseqGamesScoring100Plus = MainActivity.GetSavedIntWithDefaultValue(mConseqGamesScoring100Plus, BestConseqGames100Plus);
-                mSumScores100Plus = MainActivity.GetSavedIntWithDefaultValue(0, SumScores100Plus) / 100.0;
+                mSumScoresPositive = MainActivity.GetSavedIntWithDefaultValue(0, SumScores100Plus) / 100.0;
             }
         }
 
@@ -1364,7 +1364,7 @@ namespace MindMove.Cocos
                             text += "\nwhile doing your best to change how it changes.";
 
                             text += "\n\nThe obstacle is your own doodling habits:";
-                            text += "\nscoring 100 = as good as random scribbling.";
+                            text += "\nscoring 0 = parity with random scribbling.";
 
                             text += "\n\n\n\nWe recommend to first vary your scribble";
                             text += "\nin ways intuitive to you, then play the Tutorial.";
@@ -1683,7 +1683,7 @@ namespace MindMove.Cocos
                 float fontSize = MediumFontSize;
                 double colorMult = 1.1;
 
-                if (mBestScore < 100)
+                if (mBestScore < 0)
                 {
                     fontSize *= 1.2f;
                 }
@@ -2153,7 +2153,7 @@ namespace MindMove.Cocos
 
                 if (mConseqGamesScoring100Plus > 0)
                 {
-                    conseq100PlusAvg.Text = "Avg score over last " + mConseqGamesScoring100Plus + " games: " + Math.Round((mSumScores100Plus / mConseqGamesScoring100Plus), 1);
+                    conseq100PlusAvg.Text = "Avg score over last " + mConseqGamesScoring100Plus + " games: " + Math.Round((mSumScoresPositive / mConseqGamesScoring100Plus), 1);
                 }
             }
         }
@@ -2243,7 +2243,7 @@ namespace MindMove.Cocos
         {
             if (mVoidStormBestScore >= SharedParams.StormLevel4Score)
             {
-                return 1 + (int)((mVoidStormBestScore - 100) / 10.0);
+                return 1 + (int)((mVoidStormBestScore) / 10.0);
             }
             else if (mVoidStormBestScore >= SharedParams.StormLevel3Score)
             {
@@ -2743,7 +2743,7 @@ namespace MindMove.Cocos
 
                 if (mMovesRemaining == 0)
                 {
-                    if (mFinalScore >= 1)
+                    if (mFinalScore >= 0)
                     {
                         MainActivity.SoundEffects.RoundCompleteWin();
                     }
@@ -2816,9 +2816,9 @@ namespace MindMove.Cocos
                 double factor = SharedParams.UpdateDistanceAngleDeltaFactor;
                 double maxDelta = SharedParams.MaxUpdateDistanceDelta;
 
-                if (mPlayMode == PlayMode.Standard && mBestScore < 100)
+                if (mPlayMode == PlayMode.Standard && mBestScore < 0)
                 {
-                    // Increase them when score hasn't yet reached 100
+                    // Increase them when score hasn't yet reached 0
                     factor *= 1.5;
                     maxDelta *= 1.5;
                 }
@@ -2862,14 +2862,14 @@ namespace MindMove.Cocos
         {
             if (!mDrawingGlitter && mGlitterDots.Count > 0)
             {
-                double glitterScore = mFinalScore;
+                double glitterScore = mFinalScore + 1;
                 if (glitterScore < 0.99) { glitterScore = 0.99; }
                 double durationMult = 1.0;
 
                 if (glitterScore >= 1 && !mExperimentMode)
                 {
                     durationMult = (glitterScore / 2) + 0.5;
-                    glitterScore *= Math.Sqrt(GlitterEffect100PlusBoost);
+                    glitterScore *= Math.Sqrt(GlitterEffectPositiveBoost);
                 }
 
                 List<GlitterDot> tempGlitterDots = new List<GlitterDot>();
@@ -2907,7 +2907,7 @@ namespace MindMove.Cocos
 
         bool IsIdleGlitterMuted()
         {
-            return mExperimentMode || (mFirstPlay || mShowingSpecialDetails || (mPlayMode == PlayMode.Standard && mBestScore < 100 && mNumberOfFinishedPlaysThisSession == 0));
+            return mExperimentMode || (mFirstPlay || mShowingSpecialDetails || (mPlayMode == PlayMode.Standard && mBestScore < 0 && mNumberOfFinishedPlaysThisSession == 0));
         }
 
         void ProcessIdleGlitter(/*bool cleanup = false*/)
@@ -2929,10 +2929,10 @@ namespace MindMove.Cocos
                 }
                 else if (mPlayMode != PlayMode.Continuity)
                 {
-                    if (mLastFinalScore > 1 && !mExperimentMode)
+                    if (mLastFinalScore > 0 && !mExperimentMode)
                     {
                         // Bigger idle glitter for higher scores
-                        radiusMult *= (GlitterEffect100PlusBoost * (float)Math.Pow(mLastFinalScore, 2));
+                        radiusMult *= (GlitterEffectPositiveBoost * (float)Math.Pow(mLastFinalScore + 1, 2));
                         numIdleGlitterDots = (int)(numIdleGlitterDots * radiusMult);
                     }
                 }
@@ -2940,7 +2940,7 @@ namespace MindMove.Cocos
                 {
                     if (mContinuityLastSeriesScore > 1)
                     {
-                        radiusMult *= (GlitterEffect100PlusBoost * (float)Math.Pow(mContinuityLastSeriesScore, 2));
+                        radiusMult *= (GlitterEffectPositiveBoost * (float)Math.Pow(mContinuityLastSeriesScore, 2));
                         numIdleGlitterDots = (int)(numIdleGlitterDots * radiusMult);
                     }
                 }
@@ -3053,17 +3053,17 @@ namespace MindMove.Cocos
             mIdleGlitterDots.Add(dot);
         }
 
-        void Update100PlusAvgScores()
+        void UpdatePositiveAvgScores()
         {
-            mSumScores100Plus += mFinalScore * 100;
+            mSumScoresPositive += mFinalScore * 100;
             mConseqGamesScoring100Plus++;
-            if ((mSumScores100Plus / mConseqGamesScoring100Plus) < 100)
+            if ((mSumScoresPositive / mConseqGamesScoring100Plus) < 0)
             {
-                mSumScores100Plus = 0;
+                mSumScoresPositive = 0;
                 mConseqGamesScoring100Plus = 0;
             }
             MainActivity.SaveIntValue(mConseqGamesScoring100Plus, ConseqGames100Plus);
-            MainActivity.SaveIntValue((int)(100 * mSumScores100Plus), SumScores100Plus);
+            MainActivity.SaveIntValue((int)(100 * mSumScoresPositive), SumScores100Plus);
 
             if (mConseqGamesScoring100Plus > mBestConseqGamesScoring100Plus)
             {
@@ -3074,8 +3074,8 @@ namespace MindMove.Cocos
 
         void UpdateBestScores()
         {
-            // Only update best scores after at least 10 moves
-            if (!mExperimentMode && (mMovesRemaining < (mMovesPerRound - MinMovesToTriggerEnd)))
+            // Only update best scores after game is finished
+            if (!mExperimentMode && mMovesRemaining == 0)
             {
                 if (mFinalScore * 100 > MinParticipationScore && !mReachedParticipationScore)
                 {
@@ -3092,7 +3092,7 @@ namespace MindMove.Cocos
                 {
                     mContinuitySeriesScores.Add(mFinalScore);
 
-                    Update100PlusAvgScores();
+                    UpdatePositiveAvgScores();
 
                     if (mContinuitySeriesScores.Count >= mContinuityGamesCount)
                     {
@@ -3159,6 +3159,7 @@ namespace MindMove.Cocos
 
                     if (newAch)
                     {
+                        SharedParams.UpdateUnlocks();
                         mRedrawRankLabel = true;
                     }
                     if (immediateBestScore)
@@ -3171,13 +3172,10 @@ namespace MindMove.Cocos
                     double oldBestScore = mBestScore;
                     double oldBestTargetAnglesScore = mBestLongGameScore;
 
-                    bool immediateBestScore = false;
-
                     if (mLongGameEnabled)
                     {
                         if (mFinalScore * 100 > mBestLongGameScore)
                         {
-                            immediateBestScore = true;
                             mBestLongGameScore = mFinalScore * 100;
                             MainActivity.SaveIntValue((int)(100 * mBestLongGameScore), SharedParams.BestTargetAnglesScore);
                         }
@@ -3186,12 +3184,11 @@ namespace MindMove.Cocos
                     {
                         if (mFinalScore * 100 > mBestScore)
                         {
-                            immediateBestScore = true;
                             mBestScore = mFinalScore * 100;
                             MainActivity.SaveIntValue((int)(100 * mBestScore), SharedParams.StandardBestScore);
                         }
                     }
-                    Update100PlusAvgScores();
+                    UpdatePositiveAvgScores();
 
                     // Check for new achievement.
                     // Note: We do 'if' rather than 'else if' so we don't skip over achivements.
@@ -3222,6 +3219,7 @@ namespace MindMove.Cocos
 
                     if (newAch)
                     {
+                        SharedParams.UpdateUnlocks();
                         mRedrawRankLabel = true;
                     }
                 }
@@ -3265,13 +3263,12 @@ namespace MindMove.Cocos
                 {
                     if (mPositiveTotal < mNegativeTotal)
                     {
-                        mFinalScore = (mPositiveTotal / mNegativeTotal);
+                        mFinalScore = (mPositiveTotal / mNegativeTotal) - 1;
                     }
                     else
                     {
-                        mFinalScore = 2 - (mNegativeTotal / mPositiveTotal);
+                        mFinalScore = 1 - (mNegativeTotal / mPositiveTotal);
                     }
-                    //mFinalScore = (2 * mPositiveTotal) / (mPositiveTotal + mNegativeTotal);
                     mFinalScore *= ((double)moves / (double)mMovesPerRound);;
                 }
 
