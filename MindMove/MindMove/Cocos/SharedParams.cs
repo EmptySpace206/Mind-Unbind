@@ -82,7 +82,7 @@ namespace MindMove.Cocos
         public const double Continuity_4Score = 10;
 
         public const double VoidStormUnlock = 0;
-        public const double ContinuityUnlock = 10;
+        public const double ContinuityUnlock = 8;
         public const double ContinuityLongSeriesUnlock = Continuity_2Score;
 
         public const string StormLevel0 = "Void Looms";
@@ -96,10 +96,10 @@ namespace MindMove.Cocos
         public const string StreamOfContinuity = "Shifting Seeds";
         public const string VoidStorm = "Void Storm";
 
-        public const string Continuity1 = "Tendril";
-        public const string Continuity2 = "Vine";
-        public const string Continuity3 = "Branch";
-        public const string Continuity4 = "Canopy";
+        public const string Continuity1 = "Stirring";
+        public const string Continuity2 = "Unfurling";
+        public const string Continuity3 = "Branching";
+        public const string Continuity4 = "Flourishing";
 
         public const string StandardBestScore = "BasicHighestScoreV1.xml";
         public const string BestTargetAnglesScore = "BestTargetAnglesScore.xml";
