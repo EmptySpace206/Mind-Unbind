@@ -38,7 +38,7 @@
 \nThe goal is to draw a continuous curve, varying its directional flow, changing how it changes. Done well, this creates intuitively complex drawings.
 \n\nScores range -100 to 100: from no variation (a straight line, or circle), to optimally varied shapes.
 A random, truly mindless scribbler - lacking both intent and habit - averages 0.
-\n\nHuman scores span a narrower range, roughly -20 to 20. Effortless 'random scribble' attempts typically reach -20; yet surpassing 20 is rare, as subtle doodling defaults inevitably creep into our scribbling.
+\n\nHuman scores span a narrower range, roughly +- 20. Effortless 'random scribble' attempts typically reach -20; yet surpassing 20 is rare, as subtle doodling defaults inevitably creep into our scribbling.
 \n\nWhile you endeavor to vary curves as best you can, your signature habits lurk in the background,
 challenging your efforts. Even matching randomness can be quite difficult!"/>
 	        <TextView
@@ -227,7 +227,7 @@ challenging your efforts. Even matching randomness can be quite difficult!"/>
                 android:textColor="#D2D8FF"
                 android:text=
 "The final score is calculated as:
-\n100 * (sum(bonuses) / sum(penalties) - 1), IF bonuses &lt; penalties; ELSE 1 - ((sum(penalties) / sum(bonuses))).
+\n100 * (sum(bonuses) / sum(penalties) - 1), IF bonuses &lt; penalties; ELSE 100 * (1 - (sum(penalties) / sum(bonuses))).
 \nThis makes scores symmetric around 0, where bonuses = penalties.\n"/> 
     </LinearLayout>
     </ScrollView>
