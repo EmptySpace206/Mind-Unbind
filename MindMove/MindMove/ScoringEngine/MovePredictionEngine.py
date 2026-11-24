@@ -38,9 +38,9 @@ Summary of how it works:
         - Score the new Move by how close it was to the predicted. 
           Update positive, and negative, score sums used for final scoring.
         
-    - Calculate the final score so it's between 0 and 200:
-        100 * ((posSum < negSum) ? (posSum / negSum) : 2 - (negSum / posSum)).
-      Note: When posSum == negSum, score = 100. Random moves average this. 
+    - Calculate the final score so it's between -100 and 100:
+        100 * ((posSum < negSum) ? ((posSum / negSum) - 1) : 1 - (negSum / posSum)).
+      Note: When posSum == negSum, score = 0. Random moves average this. 
       
 Notes
 - An emergent property is that varying change in relative angle, between moves, is the key to high scores.
@@ -54,8 +54,8 @@ class BaseMoveWeights:
     # The model is limited to 30 states is for performance reasons, as it's O(n^2). This is the one of two significant heuristics in this algorithm.
     #
     # Scoring tests for StateCount=30, vs. StateCount=60, over 1000 randomized 300-move games. 
-    # - 30-State: Mean score = 100.17, StdDev = 7.13
-    # - 60-State: Mean score = 100.25, StdDev = 7.13
+    # - 30-State: Mean score = 0.17, StdDev = 7.13
+    # - 60-State: Mean score = 0.25, StdDev = 7.13
     # - Mean difference: 1.037, StdDev = 0.778. 95% CI upper-bound = 2.56 (note scores fit a normal distribution)
     #
     # Testing 30-state vs. 120-state, over 100 randomized 300-move games: Mean difference = 1.191, StdDev = 0.87. 95% upper-bound CI = 2.9.
@@ -208,10 +208,10 @@ class MovePredictionEngine:
             neg_sum += neg
 
         if pos_sum < neg_sum:
-            final_score = pos_sum / neg_sum
+            final_score = (pos_sum / neg_sum) - 1   
         else:
-            final_score = 2 - (neg_sum / pos_sum)
-        return final_score * 100  # Range is 0 to 200. Scores are symmetrical around 100 (where pos_sum = neg_sum).
+            final_score = 1 - (neg_sum / pos_sum)
+        return final_score * 100  # Range is -100 to 100. Scores are symmetrical around 0 (where pos_sum = neg_sum).
 
     # Test function that simulates a 'game' of moveCount random moves, and returns the final score.
     # The score average converges to 100 over multiple 'games'. 
@@ -280,37 +280,37 @@ if __name__ == "__main__":
     # Demos with 30-move 'games'
 
     # A rough circle (moves ~30 degrees apart, clockwise)
-    # Scores 3.0
+    # Scores -97.0
     moves = [0, 30, 62, 89, 120, 147, 181, 210, 233, 270, 300, 330, 359, 29, 63, 95, 120, 151, 182, 211, 241, 270, 300, 325, 0, 29, 58, 90, 118, 146]
     score = MovePredictionEngine.test_score_move_series(moves)
     draw_moves(moves, score)
 
     # A spiral (add 3 degrees each move, clockwise)
-    # Scores 62.96
+    # Scores -37.04
     moves = [0, 3, 9, 18, 30, 45, 63, 84, 108, 135, 165, 198, 234, 273, 315, 0, 48, 99, 154, 214, 287, 353, 62, 134, 209, 287, 8, 92, 179, 269]
     score = MovePredictionEngine.test_score_move_series(moves)
     draw_moves(moves, score)
 
     # Roughly back-forth, then roughly straight (repeated 3x)
-    # Scores 39.65
+    # Scores -60.35
     moves = [270, 100, 280, 95, 285, 97, 90, 93, 95, 91, 90, 270, 93, 280, 101, 283, 280, 277, 280, 285, 105, 280, 102, 277, 98, 95, 90, 100, 97, 90]
     score = MovePredictionEngine.test_score_move_series(moves)
     draw_moves(moves, score)
 
     # Above, but change to a rough boxes for final 10 moves
-    # Scores 71.96
+    # Scores -28.04
     moves = [270, 100, 280, 95, 285, 97, 90, 93, 95, 91, 90, 270, 93, 280, 101, 283, 280, 277, 280, 10, 100, 185, 280, 15, 100, 185, 275, 0, 90, 180]
     score = MovePredictionEngine.test_score_move_series(moves)
     draw_moves(moves, score)
 
     # High variation in angle changes
-    # Scores 127.48
+    # Scores 27.48
     moves = [290, 330, 180, 240, 80, 90, 135, 135, 85, 230, 0, 125, 270, 100, 235, 40, 30, 75, 105, 0, 110, 210, 315, 345, 125, 150, 155, 280, 30, 50]
     score = MovePredictionEngine.test_score_move_series(moves)
     draw_moves(moves, score)
 
     # Higher variation in angle changes
-    # Scores 138.29
+    # Scores 38.29
     moves = [90, 110, 30, 200, 155, 135, 330, 175, 325, 330, 315, 350, 25, 220, 60, 300, 300, 50, 45, 15, 200, 100, 320, 120, 330, 150, 50, 300, 220, 120]
     score = MovePredictionEngine.test_score_move_series(moves)
     draw_moves(moves, score)
