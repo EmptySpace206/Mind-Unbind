@@ -1059,6 +1059,16 @@ namespace MindMove.Cocos
             // Draw timer dots
             if (!mEndRoundEarly)
             {
+                const double colorMultFactor = 1.0 / 6.0;
+                if (mFinalScore > 0)
+                {
+                    color2 = ThemeColors.AdjustColorsForMultipler(1 + colorMultFactor, color2);
+                }
+                else if (mFinalScore < 0)
+                {
+                    color2 = ThemeColors.AdjustColorsForMultipler(1 - colorMultFactor, color2);
+                }
+
                 double radianStep = (2 * Math.PI) / (double)ScoreCircleTimerDotCount;
                 int numDots = (int)Math.Ceiling(ScoreCircleTimerDotCount * ((double)mMovesRemaining / (double)mMovesPerRound));
                 int offset = ScoreCircleTimerDotCount / 4;
@@ -1363,8 +1373,9 @@ namespace MindMove.Cocos
                             text += "\n\n\nThis game is about drawing a continuous curve,";
                             text += "\nwhile doing your best to change how it changes.";
 
-                            text += "\n\nThe obstacle is your own doodling habits:";
-                            text += "\nscoring 0 = parity with random scribbling.";
+                            text += "\n\nThe obstacle is your own doodling habits.";
+                            text += "\nA score of 0 = parity with random scribbling;";
+                            text += "\na score greater than 0 = skillful variation.";
 
                             text += "\n\n\n\nWe recommend to first vary your scribble";
                             text += "\nin ways intuitive to you, then play the Tutorial.";
@@ -1723,10 +1734,22 @@ namespace MindMove.Cocos
                     mScoreLabel = null;
                 }
 
-                string score = "0.0";
+                string score = "";
                 if (mLastFinalScore != 0)
                 {
-                    score = (100 * Math.Round(mLastFinalScore, 3)).ToString("0.0");
+                    if (mLastFinalScore > 0)
+                    {
+                        score += "+";
+                    }
+                    else if (mLastFinalScore < 0)
+                    {
+                        score += "-";
+                    }
+                    score += (100 * Math.Round(Math.Abs(mLastFinalScore), 3)).ToString("0.0");
+                }
+                else
+                {
+                    score = "0.0";
                 }
                 if (mLastFinalScoreBonus != 0 && mTimerOrBonusLabel != null)
                 {
@@ -1753,7 +1776,17 @@ namespace MindMove.Cocos
             }
             else
             {
-                mScoreLabel.Text = "" + (100 * Math.Round(mFinalScore, 3)).ToString("0.0");
+                mScoreLabel.Text = "";
+
+                if (mFinalScore > 0)
+                {
+                    mScoreLabel.Text += "+";
+                }
+                else if (mFinalScore < 0)
+                {
+                    mScoreLabel.Text += "-";
+                }
+                mScoreLabel.Text += (100 * Math.Round(Math.Abs(mFinalScore), 3)).ToString("0.0");
             }
         }
 
