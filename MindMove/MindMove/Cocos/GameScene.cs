@@ -110,6 +110,8 @@ namespace MindMove.Cocos
         long mTicksLastEmergeDecayDraw = 0;
         const int EmergDecayDrawPeriod = 33;
 
+        bool mLastGameUnfinished = false;
+
         int mConseqEndRoundEarlyDueToMines = 0; // For "don't touch mines, that's not the game!" tip
 
         ///////////////////////////////////////////////////////////////////////////////////////////
@@ -1059,7 +1061,8 @@ namespace MindMove.Cocos
             // Draw timer dots
             if (!mEndRoundEarly)
             {
-                const double colorMultFactor = 1.0 / 6.0;
+                const double colorMultFactor = 0.175;
+                //double colorMultFactor = 0.1 + Math.Abs(mFinalScore);
                 if (mFinalScore > 0)
                 {
                     color2 = ThemeColors.AdjustColorsForMultipler(1 + colorMultFactor, color2);
@@ -1291,7 +1294,7 @@ namespace MindMove.Cocos
                 text += "\n\nAvoid drawing into boX's.";
                 text += "\nTouching the same boX twice ends the game.";
                 text += "\n\nInstead, draw into the empty space,";
-                text += "\nand minimize repetitive patterns.";
+                text += "\nminimizing repetitive patterns.";
             }
             else if (mPlayMode == PlayMode.Continuity)
             {
@@ -1309,7 +1312,7 @@ namespace MindMove.Cocos
                 if (!IsInContinuitySeries())
                 {
                     DrawExtraInfoLabel(
-                        info2: "Last: " + Math.Round(mContinuityLastSeriesScore * 100.0, 1) + "\nBest: " + Math.Round(mLongContinuitySeries ? mContinuityLongSeriesBestScore : mContinuitySeriesBestScore, 1) + "\n\n",
+                        info2: (mFirstPlay ? "" : "Last: " + Math.Round(mContinuityLastSeriesScore * 100.0, 1)) + "\nBest: " + Math.Round(mLongContinuitySeries ? mContinuityLongSeriesBestScore : mContinuitySeriesBestScore, 1) + "\n\n",
                         sizeMult2: 1f);
                 }
                 else if (mContinuitySeriesScores.Count > 0)
@@ -1735,31 +1738,38 @@ namespace MindMove.Cocos
                 }
 
                 string score = "";
-                if (mLastFinalScore != 0)
+                if (mLastGameUnfinished)
                 {
-                    if (mLastFinalScore > 0)
-                    {
-                        score += "+";
-                    }
-                    else if (mLastFinalScore < 0)
-                    {
-                        score += "-";
-                    }
-                    score += (100 * Math.Round(Math.Abs(mLastFinalScore), 3)).ToString("0.0");
+                    score = "NA";
                 }
                 else
                 {
-                    score = "0.0";
-                }
-                if (mLastFinalScoreBonus != 0 && mTimerOrBonusLabel != null)
-                {
-                    if (mLastFinalScoreBonus < 0)
+                    if (mLastFinalScore != 0)
                     {
-                        mTimerOrBonusLabel.Text = "-" + Math.Round(100 * -mLastFinalScoreBonus, 0);
+                        if (mLastFinalScore > 0)
+                        {
+                            score += "+";
+                        }
+                        else if (mLastFinalScore < 0)
+                        {
+                            score += "-";
+                        }
+                        score += (100 * Math.Round(Math.Abs(mLastFinalScore), 3)).ToString("0.0");
                     }
                     else
                     {
-                        mTimerOrBonusLabel.Text = "+" + Math.Round(100 * mLastFinalScoreBonus, 0);
+                        score = "0.0";
+                    }
+                    if (mLastFinalScoreBonus != 0 && mTimerOrBonusLabel != null)
+                    {
+                        if (mLastFinalScoreBonus < 0)
+                        {
+                            mTimerOrBonusLabel.Text = "-" + Math.Round(100 * -mLastFinalScoreBonus, 0);
+                        }
+                        else
+                        {
+                            mTimerOrBonusLabel.Text = "+" + Math.Round(100 * mLastFinalScoreBonus, 0);
+                        }
                     }
                 }
 
@@ -2873,10 +2883,20 @@ namespace MindMove.Cocos
 
         void EndRound(DrawPoint guideCneter)
         {
-            UpdateDynamicUpdateDistance();
-            ApplyBonusesToFinalScore();
             InitGlitter(guideCneter);
-            UpdateBestScores();
+
+            if (mMovesRemaining == 0)
+            {
+                UpdateDynamicUpdateDistance();
+                ApplyBonusesToFinalScore();
+                UpdateBestScores();
+
+                mLastGameUnfinished = false;
+            }
+            else
+            {
+                mLastGameUnfinished = true;
+            }
 
             if (mMovesRemaining != mMovesPerRound)
             {

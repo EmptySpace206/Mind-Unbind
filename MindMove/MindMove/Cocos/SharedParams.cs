@@ -82,7 +82,7 @@ namespace MindMove.Cocos
         public const double Continuity_4Score = 10;
 
         public const double VoidStormUnlock = 0;
-        public const double ContinuityUnlock = 8;
+        public const double ContinuityUnlock = 10;
         public const double ContinuityLongSeriesUnlock = Continuity_2Score;
 
         public const string StormLevel0 = "Void Looms";
@@ -116,11 +116,11 @@ namespace MindMove.Cocos
         {
             double mindStreamBest = MainActivity.GetSavedIntWithDefaultValue((int)SharedParams.BaseBestScore * 100, StandardBestScore) / 100.0;
             double voidStormBest = MainActivity.GetSavedIntWithDefaultValue((int)SharedParams.BaseBestScore * 100, VoidStormBestScore) / 100.0;
-            double ringBest = MainActivity.GetSavedIntWithDefaultValue((int)SharedParams.BaseBestScore * 100, BestTargetAnglesScore) / 100.0;
-            double continuityBest = MainActivity.GetSavedIntWithDefaultValue((int)SharedParams.BaseBestScore * 100, ContinuityBestScore) / 100.0;
+            //double ringBest = MainActivity.GetSavedIntWithDefaultValue((int)SharedParams.BaseBestScore * 100, BestTargetAnglesScore) / 100.0;
+            //double continuityBest = MainActivity.GetSavedIntWithDefaultValue((int)SharedParams.BaseBestScore * 100, ContinuityBestScore) / 100.0;
 
             IsUnlockedVoidStorm = mindStreamBest >= VoidStormUnlock;
-            IsUnlockedContinuity = mindStreamBest >= ContinuityUnlock;
+            IsUnlockedContinuity = mindStreamBest >= ContinuityUnlock || voidStormBest >= ContinuityUnlock;
         }
 
         public static int GetNumUnlockedColorThemes()
